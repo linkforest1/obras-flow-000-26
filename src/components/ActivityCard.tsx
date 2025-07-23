@@ -340,17 +340,17 @@ export function ActivityCard({
               status === 'not-completed' && "bg-neutral-100 dark:bg-neutral-900 opacity-70"
             )}>
               {/* Delete Button - Top Right Corner */}
-              <div className="absolute top-3 right-3 z-10">
+              <div className="absolute top-2 right-2 z-10">
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="h-8 w-8 p-0 text-red-500 hover:text-red-700 hover:bg-red-50" 
+                      className="h-7 w-7 p-0 text-red-500 hover:text-red-700 hover:bg-red-50" 
                       disabled={isDeleting || status === 'not-completed'}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
@@ -370,22 +370,22 @@ export function ActivityCard({
                 </AlertDialog>
               </div>
 
-              <CardHeader className="pb-3 p-4 md:p-6 pr-12">
-                <div className="space-y-3">
+              <CardHeader className="pb-2 p-3 md:p-4 pr-10">
+                <div className="space-y-2">
                   {/* Título no topo */}
-                  <h3 className="font-bold text-lg md:text-xl text-foreground leading-tight mx-0 py-[10px]">
+                  <h3 className="font-bold text-base md:text-lg text-foreground leading-tight mx-0 py-1">
                     {title}
                   </h3>
                   
                   {/* Status, Prioridade e Progresso logo abaixo */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge className={cn("text-xs", statusConfig[status].className)}>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <Badge className={cn("text-xs px-2 py-0.5", statusConfig[status].className)}>
                       {statusConfig[status].label}
                     </Badge>
-                    <Badge variant="outline" className={cn("text-xs", priorityConfig[priority].className)}>
+                    <Badge variant="outline" className={cn("text-xs px-2 py-0.5", priorityConfig[priority].className)}>
                       {priorityConfig[priority].label}
                     </Badge>
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-1.5 text-sm">
                       <span className="font-medium text-vale-blue">{currentProgress}%</span>
                       {['pending', 'in-progress', 'completed', 'delayed'].includes(status) && (
                         <Tooltip>
@@ -393,7 +393,7 @@ export function ActivityCard({
                             <Button 
                               variant="ghost" 
                               size="sm" 
-                              className="h-6 w-6 p-0" 
+                              className="h-5 w-5 p-0" 
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setShowProgressEditor(!showProgressEditor);
@@ -413,17 +413,17 @@ export function ActivityCard({
 
                   {/* Barra de progresso */}
                   {['pending', 'in-progress', 'completed', 'delayed'].includes(status) && (
-                    <Progress value={currentProgress} className="h-2" />
+                    <Progress value={currentProgress} className="h-1.5" />
                   )}
 
                   {/* Descrição */}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                     {description}
                   </p>
                   
                   {/* Manual Progress Editor */}
                   {showProgressEditor && (
-                    <div className="space-y-3 pt-2 border-t" onClick={(e) => e.stopPropagation()}>
+                    <div className="space-y-2 pt-2 border-t" onClick={(e) => e.stopPropagation()}>
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-foreground">Progresso Manual:</label>
                         <div className="space-y-2">
@@ -486,12 +486,12 @@ export function ActivityCard({
                   
                   {/* Visible Subtasks on Card */}
                   {showSubtasksOnCard && subtasks.length > 0 && (
-                    <div className="space-y-2 pt-2 border-t">
+                    <div className="space-y-1.5 pt-2 border-t">
                       <div className="text-xs text-muted-foreground font-medium">Lista de verificação {subtasks.filter(t => t.completed).length}/{subtasks.length}</div>
                       <div className="space-y-1">
                         {subtasks.map(subtask => (
                           <div key={subtask.id} className="flex items-center gap-2 text-sm">
-                            <Checkbox checked={subtask.completed} onCheckedChange={() => handleSubtaskToggle(subtask.id)} className="h-4 w-4" />
+                            <Checkbox checked={subtask.completed} onCheckedChange={() => handleSubtaskToggle(subtask.id)} className="h-3.5 w-3.5" />
                             <span className={cn("flex-1 text-xs", subtask.completed && "line-through text-muted-foreground")}>
                               {subtask.text}
                             </span>
@@ -503,55 +503,55 @@ export function ActivityCard({
                 </div>
               </CardHeader>
               
-              <CardContent className="p-4 md:p-6 pt-0">
-                <div className="space-y-2 text-sm mb-4">
+              <CardContent className="p-3 md:p-4 pt-0">
+                <div className="space-y-1.5 text-sm mb-3">
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <User className="w-4 h-4 flex-shrink-0" />
-                    <span className="truncate">{responsible} • {discipline}</span>
+                    <User className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="truncate text-xs">{responsible} • {discipline}</span>
                   </div>
                   
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <Calendar className="w-4 h-4 flex-shrink-0" />
-                    <span className="text-xs sm:text-sm">{formattedStartDate} - {formattedEndDate}</span>
+                    <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="text-xs">{formattedStartDate} - {formattedEndDate}</span>
                   </div>
                   
                   {location && (
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <MapPin className="w-4 h-4 flex-shrink-0" />
-                      <span className="truncate text-xs sm:text-sm">{location}</span>
+                      <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="truncate text-xs">{location}</span>
                     </div>
                   )}
 
                   {asset && (
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <Package className="w-4 h-4 flex-shrink-0" />
-                      <span className="truncate text-xs sm:text-sm">{asset}</span>
+                      <Package className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="truncate text-xs">{asset}</span>
                     </div>
                   )}
                   
-                  <div className="flex items-center gap-4 pt-2">
+                  <div className="flex items-center gap-3 pt-1">
                     <div className="flex items-center gap-1 text-muted-foreground">
-                      <Camera className="w-4 h-4" />
+                      <Camera className="w-3.5 h-3.5" />
                       <span className="text-xs">{actualPhotosCount}</span>
                     </div>
                     <div className="flex items-center gap-1 text-muted-foreground">
-                      <MessageCircle className="w-4 h-4" />
+                      <MessageCircle className="w-3.5 h-3.5" />
                       <span className="text-xs">{comments}</span>
                     </div>
                     <div className="flex items-center gap-1 text-muted-foreground">
-                      <Users className="w-4 h-4" />
-                      <span className="text-xs">{totalEmployees} funcionários</span>
+                      <Users className="w-3.5 h-3.5" />
+                      <span className="text-xs">{totalEmployees}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Buttons - Larger Icons */}
-                <div className="flex justify-center gap-4 pt-3 border-t">
+                {/* Action Buttons - Smaller Icons */}
+                <div className="flex justify-center gap-2 pt-2 border-t">
                   {currentProgress !== 100 && status !== 'not-completed' && status !== 'delayed' && (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button onClick={(e) => {e.stopPropagation(); handleCompleteTask();}} size="sm" className="h-10 w-10 p-0 bg-vale-green hover:bg-vale-green/90 text-white">
-                          <CheckCircle2 className="w-5 h-5" />
+                        <Button onClick={(e) => {e.stopPropagation(); handleCompleteTask();}} size="sm" className="h-8 w-8 p-0 bg-vale-green hover:bg-vale-green/90 text-white">
+                          <CheckCircle2 className="w-4 h-4" />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
@@ -563,8 +563,8 @@ export function ActivityCard({
                   {currentProgress !== 100 && status !== 'not-completed' && status !== 'delayed' && (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button onClick={(e) => {e.stopPropagation(); handleCompleteWithDelay();}} size="sm" className="h-10 w-10 p-0 bg-yellow-500 hover:bg-yellow-600 text-white">
-                          <Clock className="w-5 h-5" />
+                        <Button onClick={(e) => {e.stopPropagation(); handleCompleteWithDelay();}} size="sm" className="h-8 w-8 p-0 bg-yellow-500 hover:bg-yellow-600 text-white">
+                          <Clock className="w-4 h-4" />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
@@ -578,8 +578,8 @@ export function ActivityCard({
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <AlertDialogTrigger asChild>
-                            <Button size="sm" variant="destructive" className="h-10 w-10 p-0 bg-red-600 hover:bg-red-700" disabled={isUncompleting} onClick={(e) => e.stopPropagation()}>
-                              <XCircle className="w-5 h-5 text-white" />
+                            <Button size="sm" variant="destructive" className="h-8 w-8 p-0 bg-red-600 hover:bg-red-700" disabled={isUncompleting} onClick={(e) => e.stopPropagation()}>
+                              <XCircle className="w-4 h-4 text-white" />
                             </Button>
                           </AlertDialogTrigger>
                         </TooltipTrigger>
@@ -606,8 +606,8 @@ export function ActivityCard({
                   
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button onClick={(e) => {e.stopPropagation(); setShowEmployeeModal(true);}} variant="outline" size="sm" className="h-10 w-10 p-0" disabled={status === 'not-completed'}>
-                        <Users className="w-5 h-5" />
+                      <Button onClick={(e) => {e.stopPropagation(); setShowEmployeeModal(true);}} variant="outline" size="sm" className="h-8 w-8 p-0" disabled={status === 'not-completed'}>
+                        <Users className="w-4 h-4" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -617,8 +617,8 @@ export function ActivityCard({
                   
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button onClick={(e) => {e.stopPropagation(); handleAddImage();}} variant="outline" size="sm" className="h-10 w-10 p-0" disabled={status === 'not-completed'}>
-                        <Image className="w-5 h-5" />
+                      <Button onClick={(e) => {e.stopPropagation(); handleAddImage();}} variant="outline" size="sm" className="h-8 w-8 p-0" disabled={status === 'not-completed'}>
+                        <Image className="w-4 h-4" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -628,8 +628,8 @@ export function ActivityCard({
                   
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button onClick={(e) => {e.stopPropagation(); handleAddComment();}} variant="outline" size="sm" className="h-10 w-10 p-0" disabled={status === 'not-completed'}>
-                        <MessageSquare className="w-5 h-5" />
+                      <Button onClick={(e) => {e.stopPropagation(); handleAddComment();}} variant="outline" size="sm" className="h-8 w-8 p-0" disabled={status === 'not-completed'}>
+                        <MessageSquare className="w-4 h-4" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
