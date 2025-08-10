@@ -690,6 +690,27 @@ export type Database = {
           },
         ]
       }
+      timeline: {
+        Row: {
+          Atividade: string | null
+          ID: number
+          Mes: string | null
+          status: string | null
+        }
+        Insert: {
+          Atividade?: string | null
+          ID: number
+          Mes?: string | null
+          status?: string | null
+        }
+        Update: {
+          Atividade?: string | null
+          ID?: number
+          Mes?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
